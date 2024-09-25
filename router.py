@@ -23,3 +23,8 @@ async def get_tasks():
     tasks = await TaskOperation.find_all()
     return {"data": tasks}
 
+
+@router.get("/{task_id}")
+async def get(task_id: int):
+    task = await TaskOperation.get(task_id)
+    return task

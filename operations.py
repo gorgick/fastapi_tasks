@@ -26,3 +26,11 @@ class TaskOperation:
             task_models = result.scalars().all()
             return task_models
 
+    @classmethod
+    async def get(cls, task_id: int) -> tables.TaskOrm:
+        async with async_session() as session:
+            task = select(tables.TaskOrm).where(TaskOrm.id == task_id)
+            result = await session.execute(task)
+            task_models = result.scalars().all()
+            return task_models
+
